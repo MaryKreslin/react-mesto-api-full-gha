@@ -6,13 +6,15 @@ const NotFoundErr = require('../errors/notFoundErr');
 const UnauthorizedErr = require('../errors/unauthorizedErr');
 const ConflictErr = require('../errors/conflictErr');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'super-secret-key',
+        NODE_ENV === 'production' ? JWT_SECRET : 'super-secret-key',
         { expiresIn: '7d' },
       );
       if (!token) {
