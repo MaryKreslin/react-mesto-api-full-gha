@@ -1,0 +1,10 @@
+.header__menu {
+    margin: 0;
+    padding: 0;
+     background-color: transparent;
+}
+
+.header__menu:hover {
+    cursor: pointer;
+    opacity: .6;
+}

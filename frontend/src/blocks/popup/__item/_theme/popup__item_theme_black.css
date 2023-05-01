@@ -1,0 +1,12 @@
+.popup__item_theme_black {
+    background-color: #000;
+    color: #CCCCCC;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+}
+
+.popup__item_theme_black:focus {
+    border: none;
+    outline: 0;
+    border-bottom: 2px solid #CCCCCC;
+}

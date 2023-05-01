@@ -1,0 +1,77 @@
+@import url(./vendor/normalize.css);
+
+@import url(./vendor/fonts/fonts.css);
+@import url(./blocks/root/root.css);
+@import url(./blocks/page/page.css);
+
+@import url(./blocks/header/header.css);
+@import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__text/header__text.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__email-block/header__email-block.css);
+@import url(./blocks/header/__email-block/_vertical/header__email-block_vertical.css);
+@import url(./blocks/header/__button/header__button.css);
+@import url(./blocks/header/__menu/header__menu.css);
+
+@import url(./blocks/content/content.css);
+
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/profile/__about/profile__about.css);
+@import url(./blocks/profile/__add-button/profile__add-button.css);
+@import url(./blocks/profile/__avatar-block/profile__avatar-block.css);
+@import url(./blocks/profile/__avatar/profile__avatar.css);
+@import url(./blocks/profile/__edit-button/profile__edit-button.css);
+@import url(./blocks/profile/__info/profile__info.css);
+@import url(./blocks/profile/__name/profile__name.css);
+@import url(./blocks/profile/__string/profile__string.css);
+
+@import url(./blocks/elements/elements.css);
+
+@import url(./blocks/element/element.css);
+@import url(./blocks/element/__image/element__image.css);
+@import url(./blocks/element/__like/element__like.css);
+@import url(./blocks/element/__text/element__text.css);
+@import url(./blocks/element/__title/element__title.css);
+@import url(./blocks/element/__trash/element__trash.css);
+@import url(./blocks/element/__block-like/element__block-like.css);
+@import url(./blocks/element/__like/_type/element__like_type_active.css);
+@import url(./blocks/element/__count-like/element__count-like.css);
+@import url(./blocks/element/__trash/_disabled/element__trash_disabled.css);
+
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/footer/__text/footer__text.css);
+
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/__close-button/popup__close-button.css);
+@import url(./blocks/popup/__fieldset/popup__fieldset.css);
+@import url(./blocks/popup/__item/popup__item.css);
+@import url(./blocks/popup/__field/popup__field.css);
+@import url(./blocks/popup/__item/_el/popup__item_el_about.css);
+@import url(./blocks/popup/__item/_el/popup__item_el_name.css);
+@import url(./blocks/popup/__save-button/popup__save-button.css);
+@import url(./blocks/popup/__content/popup__content.css);
+@import url(./blocks/popup/__content/_type/popup__content_type_info.css);
+@import url(./blocks/popup/__title/popup__title.css);
+@import url(./blocks/popup/__title/_type/popup__title_type_info.css);
+@import url(./blocks/popup/__caption/popup__caption.css);
+@import url(./blocks/popup/__image/popup__image.css);
+@import url(./blocks/popup/__figure/popup__figure.css);
+@import url(./blocks/popup/__content-image/popup__content-image.css);
+@import url(./blocks/popup/__content-confirm/popup__content-confirm.css);
+@import url(./blocks/popup/_opened/popup_opened.css);
+@import url(./blocks/popup/_type/popup_type_image.css);
+@import url(./blocks/popup/_type/popup_type_infoTooltip.css);
+@import url(./blocks/popup/__fieldset/_type/popup__fielset_type_info.css);
+@import url(./blocks/popup/__error/popup__error.css);
+@import url(./blocks/popup/__infoImage/popup__infoImage.css);
+@import url(./blocks/popup/__item/_type/popup__item_type_error.css);
+@import url(./blocks/popup/__save-button/_disabled/popup__save-button_disabled.css);
+@import url(./blocks/popup/__error/_visible/popup__error_visible.css);
+
+@import url(./blocks/form/form.css);
+@import url(./blocks/form/__content/form__content.css);
+@import url(./blocks/popup/__title/_theme/popup__title_theme_black.css);
+@import url(./blocks/popup/__item/_theme/popup__item_theme_black.css);
+@import url(./blocks/popup/__save-button/_theme/popup__save-button_theme_black.css);
+@import url(./blocks/form/__link/form__link.css);
+@import url(./blocks/form/__text/form__text.css);

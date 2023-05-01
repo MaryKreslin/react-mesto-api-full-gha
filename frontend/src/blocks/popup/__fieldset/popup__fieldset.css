@@ -1,0 +1,11 @@
+.popup__fieldset {
+  width: 100%;
+  margin: 0;
+  padding: 54px 0 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  position: relative;
+}

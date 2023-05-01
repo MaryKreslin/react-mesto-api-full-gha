@@ -1,0 +1,6 @@
+.form {
+    width:  358px;
+    height: calc( 100vh - 268px);
+    margin: 0 auto;
+    padding: 0;
+}

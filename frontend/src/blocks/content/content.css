@@ -1,0 +1,23 @@
+.content {
+    max-width: 1280px;
+    width: 68.75%;
+    margin: 0 auto;
+   }
+
+@media (max-width: 1024px) {
+    .content {
+        width: 85.9375%;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        width: 76.65%;
+    }
+}
+
+@media (max-width: 320px) {
+    .content {
+        width: 88.125%;
+    }
+}

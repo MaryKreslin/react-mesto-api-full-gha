@@ -1,0 +1,8 @@
+.header__button {
+    background-color: transparent;
+}
+
+.header__button:hover {
+    cursor: pointer;
+    opacity: .6;
+}

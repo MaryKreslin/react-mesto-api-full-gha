@@ -1,0 +1,14 @@
+.profile__string {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    align-items: baseline;
+}
+
+@media (max-width: 320px) {
+    .profile__string {
+        gap: 10px;
+    }
+}

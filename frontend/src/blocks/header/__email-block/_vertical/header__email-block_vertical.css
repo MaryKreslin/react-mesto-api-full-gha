@@ -1,0 +1,5 @@
+.header__email-block_vertical {
+    padding-top: 40px;
+    flex-direction: column;
+    gap: 18px;
+}

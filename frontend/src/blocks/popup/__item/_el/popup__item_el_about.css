@@ -1,0 +1,15 @@
+.popup__item_el_about {
+  margin: 0;
+  padding: 0 0 13px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.popup__item_el_about:focus {
+  border: none;
+  outline: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
