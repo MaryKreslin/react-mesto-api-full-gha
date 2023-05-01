@@ -8,8 +8,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.97.137
 
-Frontend https://...
+Frontend https://domainkreslin.students.nomoredomains.monster
 
-Backend https://...
+Backend https://api.domainkresli.students.nomoredomains.monster/main
