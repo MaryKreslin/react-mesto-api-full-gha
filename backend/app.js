@@ -1,25 +1,25 @@
 require('dotenv').config();
-import express from 'express';
-import { connect } from 'mongoose';
-import { env, on } from 'process';
-import { json, urlencoded } from 'body-parser';
-import { errors } from 'celebrate';
-import NotFoundErr from './errors/notFoundErr';
-import handleErrors from './middlewares/handleErrors';
-import { auth } from './middlewares/auth';
-import { requestLogger, errorLogger } from './middlewares/logger';
-import routes from './routes/index';
+const express = require('express');
+const mongoose = require('mongoose');
+const process = require('process');
+const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
+const NotFoundErr = require('./errors/notFoundErr');
+const handleErrors = require('./middlewares/handleErrors');
+const { auth } = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const routes = require('./routes/index');
 
-const { PORT = 3000 } = env;
+const { PORT = 3000 } = process.env;
 const app = express();
 
-app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-on('uncaughtException', (err) => {
+process.on('uncaughtException', (err) => {
   console.log(err);
 });
-connect(
+mongoose.connect(
   'mongodb://127.0.0.1:27017/mestodb',
   {
     useNewUrlParser: true,
