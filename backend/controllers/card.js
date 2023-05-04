@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Card = require('../models/card');
 const ValidationErr = require('../errors/validationErr');
 const NotFoundErr = require('../errors/notFoundErr');
@@ -20,7 +21,7 @@ module.exports.createCard = (req, res, next) => {
       res.status(201).send({ data: card });
     })
     .catch((error) => {
-      if (error.name === 'ValidationError') {
+      if (error instanceof mongoose.Error.ValidationError) {
         next(new ValidationErr('Переданы некорректные данные'));
       } else {
         next(error);
@@ -39,11 +40,12 @@ module.exports.deleteCard = (req, res, next) => {
         card.deleteOne()
           .then(() => {
             res.send({ message: 'Пост удален' });
-          });
+          })
+          .catch(next);
       }
     })
     .catch((error) => {
-      if (error.name === 'CastError') {
+      if (error instanceof mongoose.Error.CastError) {
         next(new ValidationErr('Переданы некорректные данные'));
       } else {
         next(error);
@@ -64,7 +66,7 @@ module.exports.putLike = (req, res, next) => {
       return res.send({ data: card });
     })
     .catch((error) => {
-      if (error.name === 'CastError') {
+      if (error instanceof mongoose.Error.CastError) {
         next(new ValidationErr('Переданы некорректные данные'));
       } else {
         next(error);
@@ -85,7 +87,7 @@ module.exports.deleteLike = (req, res, next) => {
       return res.send({ data: card });
     })
     .catch((error) => {
-      if (error.name === 'CastError') {
+      if (error instanceof mongoose.Error.CastError) {
         next(new ValidationErr('Переданы некорректные данные'));
       } else {
         next(error);

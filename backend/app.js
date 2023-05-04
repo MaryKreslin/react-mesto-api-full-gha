@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const process = require('process');
-const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const NotFoundErr = require('./errors/notFoundErr');
 const handleErrors = require('./middlewares/handleErrors');
@@ -12,8 +11,8 @@ const routes = require('./routes/index');
 const { PORT = 3000 } = process.env;
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 process.on('uncaughtException', (err) => {
   console.log(err);
@@ -38,14 +37,14 @@ app.get('/crash-test', () => {
 
 app.use(routes);
 
-app.use(errorLogger);
-
-app.use(errors());
-
 app.use('*', auth, (req, res, next) => {
   const err = new NotFoundErr('Страница не найдена');
   next(err);
 });
+
+app.use(errorLogger);
+
+app.use(errors());
 
 app.use(handleErrors);
 

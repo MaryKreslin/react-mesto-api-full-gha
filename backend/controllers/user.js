@@ -1,10 +1,10 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ValidationErr = require('../errors/validationErr');
 const NotFoundErr = require('../errors/notFoundErr');
-const UnauthorizedErr = require('../errors/unauthorizedErr');
 const ConflictErr = require('../errors/conflictErr');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -18,9 +18,6 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'super-secret-key',
         { expiresIn: '7d' },
       );
-      if (!token) {
-        throw new UnauthorizedErr('Ошибка авторизации');
-      }
       res.send({ token });
     })
     .catch(next);
@@ -35,8 +32,8 @@ module.exports.getUsers = (req, res, next) => {
     });
 };
 
-module.exports.getCurentUser = (req, res, next) => {
-  User.findById(req.user._id)
+function getUser(userId, req, res, next) {
+  User.findById(userId)
     .then((user) => {
       if (!user) {
         throw new NotFoundErr('Пользователь не найден');
@@ -51,7 +48,17 @@ module.exports.getCurentUser = (req, res, next) => {
         },
       });
     })
-    .catch(next);
+    .catch((error) => {
+      if (error instanceof mongoose.Error.CastError) {
+        next(new ValidationErr('Переданы некорректные данные'));
+      } else {
+        next(error);
+      }
+    });
+}
+
+module.exports.getCurentUser = (req, res, next) => {
+  getUser(req.user._id, req, res, next);
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -77,7 +84,7 @@ module.exports.createUser = (req, res, next) => {
     .catch((error) => {
       if (error.code === 11000) {
         next(new ConflictErr('Пользователь уже существует!'));
-      } else if (error.name === 'ValidationError') {
+      } else if (error instanceof mongoose.Error.ValidationError) {
         next(new ValidationErr('Переданы некорректные данные'));
       } else {
         next(error);
@@ -86,26 +93,13 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.getUserOnId = (req, res, next) => {
-  User.findById(req.params.id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundErr('Пользователь не найден');
-      }
-      res.send({ data: user });
-    })
-    .catch((error) => {
-      if (error.name === 'CastError') {
-        next(new ValidationErr('Переданы некорректные данные'));
-      } else {
-        next(error);
-      }
-    });
+  getUser(req.params.id, req, res, next);
 };
 
-module.exports.patchProfile = (req, res, next) => {
+function patchUser(userData, req, res, next) {
   User.findByIdAndUpdate(
     req.user._id,
-    { name: req.body.name, about: req.body.about },
+    userData,
     { new: true, runValidators: true },
   )
     .then((user) => {
@@ -115,31 +109,18 @@ module.exports.patchProfile = (req, res, next) => {
       res.send({ data: user });
     })
     .catch((error) => {
-      if (error.name === 'ValidationError') {
+      if (error instanceof mongoose.Error.ValidationError) {
         next(new ValidationErr('Переданы некорректные данные'));
       } else {
         next(error);
       }
     });
+}
+
+module.exports.patchProfile = (req, res, next) => {
+  patchUser({ name: req.body.name, about: req.body.about }, req, res, next);
 };
 
 module.exports.patchAvatar = (req, res, next) => {
-  User.findByIdAndUpdate(
-    req.user._id,
-    { avatar: req.body.avatar },
-    { new: true, runValidators: true },
-  )
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundErr('Пользователь не найден');
-      }
-      res.send({ data: user });
-    })
-    .catch((error) => {
-      if (error.name === 'ValidationError') {
-        next(new ValidationErr('Переданы некорректные данные'));
-      } else {
-        next(error);
-      }
-    });
+  patchUser({ avatar: req.body.avatar }, req, res, next);
 };
